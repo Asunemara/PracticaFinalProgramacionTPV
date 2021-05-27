@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,7 +11,7 @@ public class PanelInstrumentos {
     List<BotonesInstrumentos> botonesInstrumentos;
 
     public PanelInstrumentos(){
-        this.panel = new JPanel();
+        this.panel = new JPanel(new GridBagLayout());
         this.botonesInstrumentos = new ArrayList<>();
         try {
             rellenaBotonesFichero();
@@ -21,7 +22,7 @@ public class PanelInstrumentos {
 
     private void rellenaBotonesFichero() throws IOException {
         // ¡¡¡CAMBIAR EXCEPCIÓN!!!
-        List<String> lineas = Files.readAllLines(Paths.get("intrumentos.csv"));
+        List<String> lineas = Files.readAllLines(Paths.get("Resources/instrumentos.csv"));
         for (String s: lineas) {
            String nombre = s.split(":")[0];
            String cantidad = s.split(":")[1];
