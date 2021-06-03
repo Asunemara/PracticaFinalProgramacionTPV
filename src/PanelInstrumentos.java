@@ -8,27 +8,28 @@ import java.util.List;
 
 public class PanelInstrumentos {
     JPanel panel;
-    List<BotonesInstrumentos> botonesInstrumentos;
+    List<BotonInstrumentos> botonesInstrumentos;
 
-    public PanelInstrumentos(){
+    public PanelInstrumentos(String rutaArchivo){
         this.panel = new JPanel(new GridBagLayout());
         this.botonesInstrumentos = new ArrayList<>();
         try {
-            rellenaBotonesFichero();
+            rellenaBotonesFichero(rutaArchivo);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void rellenaBotonesFichero() throws IOException {
+    private void rellenaBotonesFichero(String ruta2) throws IOException {
         // ¡¡¡CAMBIAR EXCEPCIÓN!!!
-        List<String> lineas = Files.readAllLines(Paths.get("Resources/instrumentos.csv"));
+        String ruta = "Resources/" + ruta2;
+        List<String> lineas = Files.readAllLines(Paths.get(ruta));
         for (String s: lineas) {
            String nombre = s.split(":")[0];
            String cantidad = s.split(":")[1];
-           BotonesInstrumentos botonInstrumentos = new BotonesInstrumentos(nombre, Integer.parseInt(cantidad));
+           BotonInstrumentos botonInstrumentos = new BotonInstrumentos(nombre, Integer.parseInt(cantidad));
            botonesInstrumentos.add(botonInstrumentos);
-           panel.add(botonInstrumentos.getBoton());
+           panel.add(botonInstrumentos);
         }
     }
 

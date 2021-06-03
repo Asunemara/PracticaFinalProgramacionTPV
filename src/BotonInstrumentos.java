@@ -1,18 +1,13 @@
 import javax.swing.*;
 
-public class BotonesInstrumentos {
-    JButton boton;
+public class BotonInstrumentos extends JButton {
     String nombre;
     int cantidad;
 
-    public BotonesInstrumentos(String nombre, int cantidad) {
+    public BotonInstrumentos(String nombre, int cantidad) {
         this.nombre = nombre;
         this.cantidad = cantidad;
-        boton = new JButton(nombre);
-    }
-
-    public JButton getBoton() {
-        return boton;
+        this.setText(nombre);
     }
 
     public String getNombre() {

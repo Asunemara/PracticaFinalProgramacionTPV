@@ -5,7 +5,7 @@ public class VentanaPrincipal {
         JFrame frame = new JFrame("Instrumentos");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        PanelInstrumentos panelArticulos = new PanelInstrumentos();
+        PanelInstrumentos panelArticulos = new PanelInstrumentos("instrumentos.csv");
         frame.add(panelArticulos.getPanel());
 
         frame.pack();
