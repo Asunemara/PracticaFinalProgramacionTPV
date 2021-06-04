@@ -10,17 +10,17 @@ public class PanelInstrumentos {
     JPanel panel;
     List<BotonInstrumentos> botonesInstrumentos;
 
-    public PanelInstrumentos(String rutaArchivo) {
+    public PanelInstrumentos(String rutaArchivo, PanelCarrito carrito) {
         this.panel = new JPanel(new GridBagLayout());
         this.botonesInstrumentos = new ArrayList<>();
         try {
-            rellenaBotonesFichero(rutaArchivo);
+            rellenaBotonesFichero(rutaArchivo, carrito);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void rellenaBotonesFichero(String ruta) throws IOException {
+    private void rellenaBotonesFichero(String ruta, PanelCarrito carrito) throws IOException {
         // ¡¡¡CAMBIAR EXCEPCIÓN!!!
         String rutaCompleta = "Resources/" + ruta;
         List<String> lineas = Files.readAllLines(Paths.get(rutaCompleta));
@@ -28,6 +28,7 @@ public class PanelInstrumentos {
             String nombre = s.split(":")[0];
             String cantidad = s.split(":")[1];
             BotonInstrumentos botonInstrumentos = new BotonInstrumentos(nombre, Integer.parseInt(cantidad));
+            botonInstrumentos.addActionListener(e -> ESCarrito.insertarProducto(nombre, Integer.parseInt(cantidad), carrito));
             botonesInstrumentos.add(botonInstrumentos);
             panel.add(botonInstrumentos);
         }

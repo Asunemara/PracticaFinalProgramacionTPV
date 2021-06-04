@@ -2,16 +2,14 @@ import javax.swing.*;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class PanelCarrito {
-    JPanel panelProductos;
+public class PanelCarrito extends JPanel {
     JTextArea textoProductos;
     Map<String, Integer> listaProductos;
 
     public PanelCarrito() {
-        this.panelProductos = new JPanel();
-        textoProductos = new JTextArea();
+        textoProductos = new JTextArea("Hoal");
         textoProductos.setSize(50,50);
-        this.panelProductos.add(textoProductos);
+        this.add(textoProductos);
         this.listaProductos = new TreeMap<>();
     }
 
@@ -19,15 +17,14 @@ public class PanelCarrito {
         return textoProductos;
     }
 
-    public JPanel getPanelProductos() {
-        return panelProductos;
-    }
-
-    public void mostrarProducto(String producto, int cantidad) {
+    public void anyadirProducto(String producto, int cantidad) {
+        System.out.println("CASA");
         if(!listaProductos.containsKey(producto)) {
             listaProductos.put(producto,cantidad);
+            System.out.println("CASA1");
         } else {
             listaProductos.put(producto, listaProductos.get(producto) + cantidad);
+            System.out.println("CASA2");
         }
         mostrarTexto();
     }
@@ -36,7 +33,9 @@ public class PanelCarrito {
         String salida = "";
         for (Map.Entry<String, Integer> texto : listaProductos.entrySet()) {
             salida += "-> " + texto.getKey() + ": " + texto.getValue() + "€";
+            System.out.println(salida);
         }
-        textoProductos.setText(salida);
+        System.out.println(salida);
+        this.textoProductos.setText(salida);
     }
 }

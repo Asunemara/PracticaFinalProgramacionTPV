@@ -2,20 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VentanaPrincipal {
-    static PanelCarrito carrito = new PanelCarrito();
 
     public static void ventana() {
+        PanelCarrito carrito = new PanelCarrito();
         JFrame frame = new JFrame("Instrumentos");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new GridBagLayout());
 
-        PanelInstrumentos panelCategorias = new PanelInstrumentos("categoriasInstrumentos.csv");
+        PanelCarrito carrito2 = new PanelCarrito();
+        GridBagConstraints cCarrito = new GridBagConstraints();
+        cCarrito.gridx = 3;
+        cCarrito.gridy = 0;
+        frame.add(carrito2, cCarrito);
+
+        PanelInstrumentos panelCategorias = new PanelInstrumentos("categoriasInstrumentos.csv", carrito2);
         GridBagConstraints cPanelCategoria = new GridBagConstraints();
         cPanelCategoria.gridx = 0;
         cPanelCategoria.gridy = 0;
         frame.add(panelCategorias.getPanel(), cPanelCategoria);
 
-        PanelInstrumentos panelInstrumentosViento = new PanelInstrumentos("instrumentosViento.csv");
+        PanelInstrumentos panelInstrumentosViento = new PanelInstrumentos("instrumentosViento.csv", carrito2);
         GridBagConstraints cPanelInstrumentosViento = new GridBagConstraints();
         cPanelInstrumentosViento.gridx = 1;
         cPanelInstrumentosViento.gridy = 1;
