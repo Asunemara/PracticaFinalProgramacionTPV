@@ -10,7 +10,7 @@ public class PanelInstrumentos {
     JPanel panel;
     List<BotonInstrumentos> botonesInstrumentos;
 
-    public PanelInstrumentos(String rutaArchivo){
+    public PanelInstrumentos(String rutaArchivo) {
         this.panel = new JPanel(new GridBagLayout());
         this.botonesInstrumentos = new ArrayList<>();
         try {
@@ -20,16 +20,16 @@ public class PanelInstrumentos {
         }
     }
 
-    private void rellenaBotonesFichero(String ruta2) throws IOException {
+    private void rellenaBotonesFichero(String ruta) throws IOException {
         // ¡¡¡CAMBIAR EXCEPCIÓN!!!
-        String ruta = "Resources/" + ruta2;
-        List<String> lineas = Files.readAllLines(Paths.get(ruta));
-        for (String s: lineas) {
-           String nombre = s.split(":")[0];
-           String cantidad = s.split(":")[1];
-           BotonInstrumentos botonInstrumentos = new BotonInstrumentos(nombre, Integer.parseInt(cantidad));
-           botonesInstrumentos.add(botonInstrumentos);
-           panel.add(botonInstrumentos);
+        String rutaCompleta = "Resources/" + ruta;
+        List<String> lineas = Files.readAllLines(Paths.get(rutaCompleta));
+        for (String s : lineas) {
+            String nombre = s.split(":")[0];
+            String cantidad = s.split(":")[1];
+            BotonInstrumentos botonInstrumentos = new BotonInstrumentos(nombre, Integer.parseInt(cantidad));
+            botonesInstrumentos.add(botonInstrumentos);
+            panel.add(botonInstrumentos);
         }
     }
 
