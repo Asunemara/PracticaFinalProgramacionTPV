@@ -7,8 +7,8 @@ public class PanelCarrito extends JPanel {
     Map<String, Integer> listaProductos;
 
     public PanelCarrito() {
-        textoProductos = new JTextArea("Hoal");
-        textoProductos.setSize(50,50);
+        textoProductos = new JTextArea("Factura...",20,30);
+        //textoProductos.setSize(3,2);
         this.add(textoProductos);
         this.listaProductos = new TreeMap<>();
     }
@@ -32,7 +32,7 @@ public class PanelCarrito extends JPanel {
     private void mostrarTexto() {
         String salida = "";
         for (Map.Entry<String, Integer> texto : listaProductos.entrySet()) {
-            salida += "-> " + texto.getKey() + ": " + texto.getValue() + "€";
+            salida += "-> " + texto.getKey() + ": " + texto.getValue() + "€\n";
             System.out.println(salida);
         }
         System.out.println(salida);
