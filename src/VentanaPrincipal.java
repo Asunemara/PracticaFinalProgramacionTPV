@@ -12,7 +12,7 @@ public class VentanaPrincipal {
         GridBagConstraints cCarrito = new GridBagConstraints();
         cCarrito.gridx = 0;
         cCarrito.gridy = 0;
-        
+
         frame.add(carrito, cCarrito);
 /*
         PanelInstrumentos panelCategorias = new PanelInstrumentos("categoriasInstrumentos.csv", carrito);
@@ -44,6 +44,9 @@ public class VentanaPrincipal {
         cpanelInstrumentosElectricos.gridx = 1;
         cpanelInstrumentosElectricos.gridy = 3;
         frame.add(panelInstrumentosElectricos.getPanel(), cpanelInstrumentosElectricos);
+
+        BotonTotal botonTotal = new BotonTotal(carrito);
+        frame.add(botonTotal.panel);
 
         //frame.setSize(1000,1000);
         frame.pack();

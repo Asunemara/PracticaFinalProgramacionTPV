@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,14 +18,23 @@ public class PanelCarrito extends JPanel {
         return textoProductos;
     }
 
-    public void anyadirProducto(String producto, int cantidad) {
+    public void anyadirProducto(String nombreProducto, int precio) {
         System.out.println("CASA");
-        if(!listaProductos.containsKey(producto)) {
-            listaProductos.put(producto,cantidad);
+        if(!listaProductos.containsKey(nombreProducto)) {
+            listaProductos.put(nombreProducto,precio);
             System.out.println("CASA1");
         } else {
-            listaProductos.put(producto, listaProductos.get(producto) + cantidad);
+            listaProductos.put(nombreProducto, listaProductos.get(nombreProducto) + precio);
             System.out.println("CASA2");
+        }
+        mostrarTexto();
+    }
+
+    public void borrarProducto(String nombreProducto, int precio) {
+        System.out.println("PISTACHO");
+        if(!listaProductos.containsKey(nombreProducto)) {
+            listaProductos.remove(precio);
+            System.out.println("PISTACHO1");
         }
         mostrarTexto();
     }
@@ -37,5 +47,32 @@ public class PanelCarrito extends JPanel {
         }
         System.out.println(salida);
         this.textoProductos.setText(salida);
+    }
+
+    public int factura() {
+        int sumaTotal = 0;
+        for (Integer i: listaProductos.values()) {
+            sumaTotal += i;
+        }
+        return sumaTotal;
+    }
+
+    public void botonTotalPulsado() {
+        System.out.println("El total es: " + factura() + "€");
+        JOptionPane.showMessageDialog(null,"El total es: " + factura() + "€");
+        int reply = JOptionPane.showConfirmDialog(null, "¿Quieres imprimir la factura?", "title", JOptionPane.YES_NO_OPTION);
+        System.out.println(reply);
+        if (reply == 0) {
+            JTextPane jtp = new JTextPane();
+            jtp.setBackground(Color.white);
+            jtp.setFont(new Font("Courier New",Font.BOLD,16));
+            jtp.setText("INSTRUMENTOS CHO PIN \n \n" + BotonTotal.getFecha() + "\n \n" + textoProductos.getText() + "\n Total: " + factura() + "€");
+            boolean show = true;
+            try {
+                jtp.print(null, null, show, null, null, show);
+            } catch (java.awt.print.PrinterException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }
