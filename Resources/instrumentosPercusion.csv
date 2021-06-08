@@ -1,4 +1,4 @@
-Timbal:140
-Tambor:200
-Platillos:70
-Bombo:260
+Timbal:140:Resources/Images/Drum.png
+Tambor:200:Resources/Images/Drum2.png
+Platillos:70:Resources/Images/Cymbals.png
+Bombo:260:Resources/Images/Drum3.png

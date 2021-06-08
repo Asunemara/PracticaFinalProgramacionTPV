@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,9 +26,10 @@ public class PanelInstrumentos {
         List<String> lineas = Files.readAllLines(Paths.get(rutaCompleta));
         for (String s : lineas) {
             String nombre = s.split(":")[0];
-            String cantidad = s.split(":")[1];
-            BotonInstrumentos botonInstrumentos = new BotonInstrumentos(nombre, Integer.parseInt(cantidad));
-            botonInstrumentos.addActionListener(e -> ESCarrito.insertarProducto(nombre, Integer.parseInt(cantidad), carrito));
+            String precio = s.split(":")[1];
+            String icono = s.split(":")[2];
+            BotonInstrumentos botonInstrumentos = new BotonInstrumentos(nombre, Integer.parseInt(precio), icono);
+            botonInstrumentos.addActionListener(e -> {carrito.anyadirProducto(nombre, Integer.parseInt(precio));});
             botonesInstrumentos.add(botonInstrumentos);
             panel.add(botonInstrumentos);
         }

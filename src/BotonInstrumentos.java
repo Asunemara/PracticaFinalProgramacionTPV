@@ -2,19 +2,25 @@ import javax.swing.*;
 
 public class BotonInstrumentos extends JButton {
     String nombre;
-    int cantidad;
+    int precio;
+    Icon icon;
 
-    public BotonInstrumentos(String nombre, int cantidad) {
+    public BotonInstrumentos(String nombre, int precio, String icono) {
         this.nombre = nombre;
-        this.cantidad = cantidad;
+        this.precio = precio;
         this.setText(nombre);
+        this.icon = new ImageIcon(icono);
+        //Icon icon = new ImageIcon("\"" + icono + "\"");
+        this.setIcon(icon);
+        System.out.println(icon);
+        System.out.println(icono);
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getPrecio() {
+        return precio;
     }
 }

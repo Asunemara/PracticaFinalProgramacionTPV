@@ -1,4 +1,4 @@
-Guitarra:120
-Arpa:400
-Violín:160
-Piano:16400
+Guitarra:120:Resources/Images/Guitar.png
+Arpa:400:Resources/Images/Harp.png
+Violín:160:Resources/Images/Violin.png
+Piano:16400:Resources/Images/Piano.png

@@ -7,9 +7,13 @@ public class BotonTotal {
     JButton botonTotal;
     private final PanelCarrito carrito;
 
-    public BotonTotal(PanelCarrito carrito) {
+    public BotonTotal(PanelCarrito carrito, String rutaIcono) {
         this.panel = new JPanel();
-        this.botonTotal = new JButton("Imprimir Factura");
+        ImageIcon iconoFactura = new ImageIcon(rutaIcono);
+        this.botonTotal = new JButton("Imprimir Factura", iconoFactura);
+        botonTotal.setVerticalTextPosition(SwingConstants.BOTTOM);
+        botonTotal.setHorizontalTextPosition(SwingConstants.CENTER);
+        //this.botonTotal = new JButton(quitIcon);
         botonTotal.addActionListener(e -> carrito.botonTotalPulsado());
         this.carrito = carrito;
         panel.add(botonTotal);

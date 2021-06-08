@@ -30,10 +30,14 @@ public class PanelCarrito extends JPanel {
         mostrarTexto();
     }
 
-    public void borrarProducto(String nombreProducto, int precio) {
+    public void borrarProducto(String nombreProducto, int precio, int cantidadArticuloBorrar) {
         System.out.println("PISTACHO");
-        if(!listaProductos.containsKey(nombreProducto)) {
-            listaProductos.remove(precio);
+        if(listaProductos.containsKey(nombreProducto)) {
+            System.out.println(listaProductos.get("Arpa"));
+            listaProductos.put(nombreProducto, listaProductos.get(nombreProducto) - (precio * cantidadArticuloBorrar));
+            if (listaProductos.get(nombreProducto) <= 0) {
+                listaProductos.remove(nombreProducto);
+            }
             System.out.println("PISTACHO1");
         }
         mostrarTexto();
@@ -49,7 +53,7 @@ public class PanelCarrito extends JPanel {
         this.textoProductos.setText(salida);
     }
 
-    public int factura() {
+    private int factura() {
         int sumaTotal = 0;
         for (Integer i: listaProductos.values()) {
             sumaTotal += i;
