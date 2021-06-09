@@ -7,6 +7,7 @@ public class VentanaPrincipal {
         PanelCarrito carrito = new PanelCarrito();
         JFrame frame = new JFrame("Instrumentos Cho Pin");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setIconImage(new ImageIcon("Resources/Images/Icon.png").getImage());
         frame.setLayout(new GridBagLayout());
         carrito.setBackground(Color.black);
 
