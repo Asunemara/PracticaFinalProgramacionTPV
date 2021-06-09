@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,7 +22,6 @@ public class PanelInstrumentos {
     }
 
     private void rellenaBotonesFichero(String ruta, PanelCarrito carrito) throws IOException {
-        // ¡¡¡CAMBIAR EXCEPCIÓN!!!
         String rutaCompleta = "Resources/" + ruta;
         List<String> lineas = Files.readAllLines(Paths.get(rutaCompleta));
         for (String s : lineas) {
@@ -33,12 +30,11 @@ public class PanelInstrumentos {
             String icono = s.split(":")[2];
             String pulsador = s.split(":")[3];
             BotonInstrumentos botonInstrumentos = new BotonInstrumentos(nombre, Integer.parseInt(precio), icono, Integer.parseInt(pulsador));
-            botonInstrumentos.addActionListener(e -> { carrito.anyadirProducto(nombre, Integer.parseInt(precio), Integer.parseInt(pulsador));});
-            botonesInstrumentos.add(botonInstrumentos);
             botonInstrumentos.addActionListener(e -> {
-                contador++;
-                System.out.println("Me he ejecutado: " + contador + " veces");
+                carrito.anyadirProducto(nombre, Integer.parseInt(precio), Integer.parseInt(pulsador));
             });
+            botonesInstrumentos.add(botonInstrumentos);
+            botonInstrumentos.addActionListener(e -> contador++);
             panel.add(botonInstrumentos);
         }
     }

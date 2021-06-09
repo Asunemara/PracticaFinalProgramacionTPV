@@ -3,9 +3,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BotonTotal {
+    private final PanelCarrito carrito;
     JPanel panel;
     JButton botonTotal;
-    private final PanelCarrito carrito;
 
     public BotonTotal(PanelCarrito carrito, String rutaIcono) {
         this.panel = new JPanel();
@@ -13,7 +13,6 @@ public class BotonTotal {
         this.botonTotal = new JButton("Imprimir Factura", iconoFactura);
         botonTotal.setVerticalTextPosition(SwingConstants.BOTTOM);
         botonTotal.setHorizontalTextPosition(SwingConstants.CENTER);
-        //this.botonTotal = new JButton(quitIcon);
         botonTotal.addActionListener(e -> carrito.botonTotalPulsado());
         this.carrito = carrito;
         panel.add(botonTotal);

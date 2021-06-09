@@ -1,25 +1,24 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
 public class BotonBorrar {
+    private final PanelCarrito carrito;
     JPanel panel;
     JButton botonBorrar;
-    private final PanelCarrito carrito;
-    //private String nombreArticulo;
 
     public BotonBorrar(PanelCarrito carrito, String rutaIcono) {
-        int precioArticulo;
         this.panel = new JPanel();
         this.carrito = carrito;
         ImageIcon iconoBorrar = new ImageIcon(rutaIcono);
-        this.botonBorrar = new JButton("Borrar último elemento", iconoBorrar);
+        this.botonBorrar = new JButton("Quitar Artículo", iconoBorrar);
         botonBorrar.setVerticalTextPosition(SwingConstants.BOTTOM);
         botonBorrar.setHorizontalTextPosition(SwingConstants.CENTER);
-        botonBorrar.addActionListener(e -> { borrarObjeto(); });
+        botonBorrar.addActionListener(e -> {
+            borrarObjeto();
+        });
         panel.add(botonBorrar);
     }
 
@@ -36,25 +35,18 @@ public class BotonBorrar {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-        //carrito.borrarProducto("Arpa", 400);
     }
 
     private int getPrecioArticulo(String nombreArticulo) throws IOException {
-        System.out.println(nombreArticulo);
-        String rutaCompleta = "C:\\Users\\Khakuki\\Desktop\\sip.txt";
+        String rutaCompleta = "Resources/Precios.csv";
         List<String> lineas = Files.readAllLines(Paths.get(rutaCompleta));
         for (String s : lineas) {
             String nombre = s.split(":")[0];
             String cantidad = s.split(":")[1];
-            System.out.println(nombre);
-        if (nombreArticulo.equals(nombre)) {
-            System.out.println("Estoy");
-            System.out.println(cantidad);
-            return Integer.parseInt(cantidad);
-        } else {
-            System.out.println("No estoy");
+            if (nombreArticulo.equals(nombre)) {
+                return Integer.parseInt(cantidad);
+            }
         }
-    }
         return 0;
     }
 }

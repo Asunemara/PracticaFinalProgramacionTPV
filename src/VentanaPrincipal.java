@@ -1,28 +1,20 @@
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class VentanaPrincipal {
 
     public static void ventana() {
         PanelCarrito carrito = new PanelCarrito();
-        JFrame frame = new JFrame("Instrumentos");
+        JFrame frame = new JFrame("Instrumentos Cho Pin");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new GridBagLayout());
-        //carrito.setBorder(new LineBorder(Color.BLACK, 7));
         carrito.setBackground(Color.black);
 
         GridBagConstraints cCarrito = new GridBagConstraints();
         cCarrito.gridx = 1;
         cCarrito.gridy = 0;
         frame.add(carrito, cCarrito);
-/*
-        PanelInstrumentos panelCategorias = new PanelInstrumentos("categoriasInstrumentos.csv", carrito);
-        GridBagConstraints cPanelCategoria = new GridBagConstraints();
-        cPanelCategoria.gridx = 1;
-        cPanelCategoria.gridy = 1;
-        frame.add(panelCategorias.getPanel(), cPanelCategoria);
-*/
+
         PanelInstrumentos panelInstrumentosViento = new PanelInstrumentos("instrumentosViento.csv", carrito);
         GridBagConstraints cPanelInstrumentosViento = new GridBagConstraints();
         cPanelInstrumentosViento.gridx = 1;
@@ -62,12 +54,7 @@ public class VentanaPrincipal {
         cBotonBorrar.gridx = 2;
         cBotonBorrar.gridy = 0;
         frame.add(botonBorrar.panel, cBotonBorrar);
-/*
-        ImageIcon water = new ImageIcon("C:\\Users\\Khakuki\\Desktop\\unnamed.jpg");
-        JButton button = new JButton(water);
-        frame.add(button);
-*/
-        //frame.setSize(1000,1000);
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
