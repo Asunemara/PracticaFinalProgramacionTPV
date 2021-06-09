@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,37 +19,92 @@ public class PanelCarrito extends JPanel {
         return textoProductos;
     }
 
-    public void anyadirProducto(String nombreProducto, int precio) {
+    public void anyadirProducto(String nombreProducto, int precio, int contador) {
         System.out.println("CASA");
+        int contadorActualizado = 0;
         if(!listaProductos.containsKey(nombreProducto)) {
             listaProductos.put(nombreProducto,precio);
+            creaContador(nombreProducto, contador);
             System.out.println("CASA1");
         } else {
             listaProductos.put(nombreProducto, listaProductos.get(nombreProducto) + precio);
+            contadorActualizado = escribeContador(nombreProducto);
             System.out.println("CASA2");
         }
         mostrarTexto();
     }
 
+    private void creaContador(String nombreProducto, int contador) {
+        File rutaArchivos = new File("Resources/Contadores");
+        rutaArchivos.mkdirs();
+        try (BufferedWriter crearFichero = new BufferedWriter(new FileWriter(rutaArchivos + "/contador" + nombreProducto + ".csv"))) {
+            crearFichero.write(String.valueOf(contador));
+            System.out.println("Hola, he llegado vivo");
+            System.out.println(contador);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int escribeContador(String nombreProducto) {
+        File rutaArchivos = new File("Resources/Contadores");
+        int contador = 0;
+        try (BufferedReader leerFichero = new BufferedReader(new FileReader(rutaArchivos + "/contador" + nombreProducto + ".csv"))) {
+            contador = Integer.parseInt(leerFichero.readLine());
+            contador++;
+            System.out.println(contador + " novedad");
+            try (BufferedWriter escribeNuevoContador = new BufferedWriter(new FileWriter(rutaArchivos + "/contador" + nombreProducto + ".csv"))) {
+                escribeNuevoContador.write(String.valueOf(contador));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contador;
+    }
+
     public void borrarProducto(String nombreProducto, int precio, int cantidadArticuloBorrar) {
-        System.out.println("PISTACHO");
+        int contador;
+        File rutaArchivos = new File("Resources/Contadores");
+        System.out.println("PISTACHO" + rutaArchivos);
         if(listaProductos.containsKey(nombreProducto)) {
             System.out.println(listaProductos.get("Arpa"));
             listaProductos.put(nombreProducto, listaProductos.get(nombreProducto) - (precio * cantidadArticuloBorrar));
+            System.out.println(cantidadArticuloBorrar + "chchhc");
+            try (BufferedReader leeContador = new BufferedReader(new FileReader(rutaArchivos + "/contador" + nombreProducto + ".csv"))) {
+                contador = Integer.parseInt(leeContador.readLine());
+                System.out.println(contador + " novedad2");
+                try (BufferedWriter escribeContador = new BufferedWriter(new FileWriter(rutaArchivos + "/contador" + nombreProducto + ".csv"))) {
+                    int contadorActualizado = contador - cantidadArticuloBorrar;
+                    System.out.println(contadorActualizado + " Pro");
+                    escribeContador.write(String.valueOf(contadorActualizado));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(listaProductos.get(nombreProducto) + " chorizo plástico");
             if (listaProductos.get(nombreProducto) <= 0) {
                 listaProductos.remove(nombreProducto);
             }
             System.out.println("PISTACHO1");
         }
-        mostrarTexto();
+       mostrarTexto();
     }
 
     private void mostrarTexto() {
         String salida = "";
+        File rutaArchivos = new File("Resources/Contadores");
         for (Map.Entry<String, Integer> texto : listaProductos.entrySet()) {
-            salida += "-> " + texto.getKey() + ": " + texto.getValue() + "€\n";
+            try (BufferedReader leerContadores = new BufferedReader(new FileReader(rutaArchivos + "/contador" + texto.getKey() + ".csv"))) {
+            salida += "-> " + texto.getKey() + ": " + texto.getValue() + "€" + " (x" + leerContadores.readLine() + ")\n";
             System.out.println(salida);
-        }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            }
         System.out.println(salida);
         this.textoProductos.setText(salida);
     }

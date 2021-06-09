@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,22 +19,24 @@ public class BotonBorrar {
         this.botonBorrar = new JButton("Borrar último elemento", iconoBorrar);
         botonBorrar.setVerticalTextPosition(SwingConstants.BOTTOM);
         botonBorrar.setHorizontalTextPosition(SwingConstants.CENTER);
-        botonBorrar.addActionListener(e -> {
-            try {
-                String nombreArticulo = JOptionPane.showInputDialog("¿Qué artículo quieres borrar?");
-                if (carrito.listaProductos.containsKey(nombreArticulo)) {
-                    String cantidadArticuloBorrar = JOptionPane.showInputDialog("¿Cuántas unidades?");
-                    carrito.borrarProducto(nombreArticulo, getPrecioArticulo(nombreArticulo), Integer.parseInt(cantidadArticuloBorrar));
-                    getPrecioArticulo(nombreArticulo);
-                } else {
-                    JOptionPane.showMessageDialog(null, "El artículo introducido no es correcto");
-                }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            //carrito.borrarProducto("Arpa", 400);
-                });
+        botonBorrar.addActionListener(e -> { borrarObjeto(); });
         panel.add(botonBorrar);
+    }
+
+    private void borrarObjeto() {
+        try {
+            String nombreArticulo = JOptionPane.showInputDialog("¿Qué artículo quieres borrar?");
+            if (carrito.listaProductos.containsKey(nombreArticulo)) {
+                String cantidadArticuloBorrar = JOptionPane.showInputDialog("¿Cuántas unidades?");
+                carrito.borrarProducto(nombreArticulo, getPrecioArticulo(nombreArticulo), Integer.parseInt(cantidadArticuloBorrar));
+                getPrecioArticulo(nombreArticulo);
+            } else {
+                JOptionPane.showMessageDialog(null, "El artículo introducido no es correcto");
+            }
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        //carrito.borrarProducto("Arpa", 400);
     }
 
     private int getPrecioArticulo(String nombreArticulo) throws IOException {

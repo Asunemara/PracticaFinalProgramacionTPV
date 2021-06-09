@@ -5,7 +5,7 @@ public class BotonInstrumentos extends JButton {
     int precio;
     Icon icon;
 
-    public BotonInstrumentos(String nombre, int precio, String icono) {
+    public BotonInstrumentos(String nombre, int precio, String icono, int pulsador) {
         this.nombre = nombre;
         this.precio = precio;
         this.setText(nombre);
